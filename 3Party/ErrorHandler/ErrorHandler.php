@@ -6,7 +6,7 @@
  * the way the error handler works.
  *
  * Usage:
- * require_once 'ErrorHandler.php';
+ * require_once 'ErrorHandler/ErrorHandler.php';
  * set_exception_handler(array('ErrorHandler', 'handleException'));
  * set_error_handler(array('ErrorHandler', 'handleError'));
  *
