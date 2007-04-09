@@ -21,7 +21,7 @@
  */
 
 if (!defined('ERROR_HANDLER_LEVEL')) {
-	define('ERROR_HANDLER_LEVEL', ALL);
+	define('ERROR_HANDLER_LEVEL', E_ALL);
 }
 
 if (!defined('ERROR_HANDLER_LOGFILE')) {
@@ -572,7 +572,7 @@ class ErrorHandler {
 	 */
 	public static function user($input) {
 			// saving previously buffered output for later
-			// egentlig bør denne jo bare sende videre til en anden side?
+			// egentlig bï¿½r denne jo bare sende videre til en anden side?
 
 			$previous_output = ob_get_contents();
 			ob_end_clean();
@@ -581,7 +581,7 @@ class ErrorHandler {
 			<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 			<html xml:lang="da" xmlns="http://www.w3.org/1999/xhtml">
 				<head>
-					<title>Der er opstået en fejl</title>
+					<title>Der er opstï¿½et en fejl</title>
 					<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 					<style type="text/css">
 					html {
@@ -603,8 +603,8 @@ class ErrorHandler {
 				</head>
 				<body>
 				<div id="container">
-				<h1>Der er opstået en fejl</h1>
-				<p>De ansvarlige er underrettet, og de kigger på fejlen så hurtigt som muligt.</p>
+				<h1>Der er opstï¿½et en fejl</h1>
+				<p>De ansvarlige er underrettet, og de kigger pï¿½ fejlen sï¿½ hurtigt som muligt.</p>
 				<p>Vi beklager ulejligheden.</p>
 				</div>
 				</body>
