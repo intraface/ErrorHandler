@@ -37,7 +37,7 @@ $pfm->addMaintainer('lead', 'lsolesen', 'Lars Olesen', 'lars@legestue.net');
 $pfm->setPackageType('php');
 
 $pfm->setAPIVersion('0.2.0');
-$pfm->setReleaseVersion('0.2.0');
+$pfm->setReleaseVersion('0.2.1');
 $pfm->setAPIStability('alpha');
 $pfm->setReleaseStability('alpha');
 $pfm->setNotes('Initial release');
