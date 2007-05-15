@@ -2,11 +2,16 @@
 /**
  * package.xml generation script
  *
- * @package MDB2_Debug_ExplainQueries
- * @author  Lars Olesen <lars@legestue.net>
- * @since   0.1.0
- * @version @package-version@
+ * @category ErrorHandling
+ * @package  ErrorHandler
+ * @author   Lars Olesen <lars@legestue.net>
+ * @license  BSD license
+ * @version  @package-version@
  */
+
+$version = '0.2.1';
+$notes = '* initial release as a PEAR package';
+$stability = 'alpha';
 
 require_once 'PEAR/PackageFileManager2.php';
 PEAR::setErrorHandling(PEAR_ERROR_DIE);
@@ -18,29 +23,31 @@ $pfm->setOptions(
         'packagedirectory'  => dirname(__FILE__),
         'packagefile'       => 'package.xml',
         'ignore'            => array(
-			'generate_package_xml.php',
-			'package.xml',
-			'*.tgz'
-			),
-		'exceptions'        => array(),
+            'generate_package_xml.php',
+            'package.xml',
+            '*.tgz'
+            ),
+        'exceptions'        => array(),
         'simpleoutput'      => true,
-	)
+    )
 );
 
 $pfm->setPackage('ErrorHandler');
 $pfm->setSummary('Custom error handler to use with php5');
 $pfm->setDescription('A custom error handler which improves on PHPs own error handler.');
-$pfm->setChannel('pear.intraface.dk');
+$pfm->setUri('http://localhost/');
 $pfm->setLicense('BSD license', 'http://www.opensource.org/licenses/bsd-license.php');
+
 $pfm->addMaintainer('lead', 'lsolesen', 'Lars Olesen', 'lars@legestue.net');
+$pfm->addMaintainer('lead', 'sune', 'Sune Jensen', 'sj@sunet.dk');
 
 $pfm->setPackageType('php');
 
-$pfm->setAPIVersion('0.2.0');
-$pfm->setReleaseVersion('0.2.1');
-$pfm->setAPIStability('alpha');
-$pfm->setReleaseStability('alpha');
-$pfm->setNotes('Initial release');
+$pfm->setAPIVersion($version);
+$pfm->setReleaseVersion($version);
+$pfm->setAPIStability($stability);
+$pfm->setReleaseStability($stability);
+$pfm->setNotes($notes);
 $pfm->addRelease();
 
 $pfm->addGlobalReplacement('package-info', '@package-version@', 'version');
@@ -52,10 +59,10 @@ $pfm->setPearinstallerDep('1.5.0');
 $pfm->generateContents();
 
 if (isset($_GET['make']) || (isset($_SERVER['argv']) && @$_SERVER['argv'][1] == 'make')) {
-	echo 'write package file';
-    $pfm->writePackageFile();
+    if ($pfm->writePackageFile()) {
+        exit('package written');
+    }
 } else {
-	echo 'debug package file';
     $pfm->debugPackageFile();
 }
 ?>
