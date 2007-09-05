@@ -33,12 +33,8 @@ if (!defined('ERROR_HANDLER_EMAIL_ADDRESS')) {
     define('ERROR_HANDLER_EMAIL_ADDRESS', '');
 }
 
-if (!defined('ERROR_HANDLER_DISPLAY')) {
-    define('ERROR_HANDLER_DISPLAY', true);
-}
-
-if (!defined('ERROR_HANDLER_DISPLAY_USER')) {
-    define('ERROR_HANDLER_DISPLAY_USER', true);
+if (!defined('ERROR_HANDLER_USE_BLUESCREEN')) {
+    define('ERROR_HANDLER_USE_BLUESCREEN', true);
 }
 
 if (!defined('ERROR_HANDLER_LEVEL_CONTINUE_SCRIPT')) {
@@ -115,57 +111,61 @@ if (!defined('ERROR_HANDLER_LEVEL_CONTINUE_SCRIPT')) {
 
         // Building exception-like backtrace
         for($i = 1; $i < sizeof($backtrace); $i++) {
-            $details['trace'][$i - 1]['file'] = @$backtrace[$i]['file'];
-            $details['trace'][$i - 1]['line'] = @$backtrace[$i]['line'];
-            $details['trace'][$i - 1]['function'] = @$backtrace[$i]['function'];
-            $details['trace'][$i - 1]['class'] = @$backtrace[$i]['class'];
-            $details['trace'][$i - 1]['type'] = @$backtrace[$i]['type'];
-            $details['trace'][$i - 1]['args'] = @$backtrace[$i]['args'];
-        }
-        return self::handleAny($details);
-    }
+			$details['trace'][$i - 1]['file'] = @$backtrace[$i]['file'];
+			$details['trace'][$i - 1]['line'] = @$backtrace[$i]['line'];
+			$details['trace'][$i - 1]['function'] = @$backtrace[$i]['function'];
+			$details['trace'][$i - 1]['class'] = @$backtrace[$i]['class'];
+			$details['trace'][$i - 1]['type'] = @$backtrace[$i]['type'];
+			$details['trace'][$i - 1]['args'] = @$backtrace[$i]['args'];
+		}
+		return self::handleAny($details);
+	}
+    
 
-    /**
-     * Hook for exception handling
-     *
-     * @param Exception exception to handle
-     */
-    public static function handleException($e) {
-        $details['type'] = get_class($e);
-        $details['code'] = $e->getCode();
-        $details['message'] = $e->getMessage();
-        $details['line'] = $e->getLine();
-        $details['file'] = $e->getFile();
-        $details['trace'] = $e->getTrace();
-        return self::handleAny($details);
-    }
+	/**
+	 * Hook for exception handling
+	 *
+	 * @param Exception exception to handle
+	 */
+	public static function handleException($e) {
+		$details['type'] = get_class($e);
+		$details['code'] = $e->getCode();
+		$details['message'] = $e->getMessage();
+		$details['line'] = $e->getLine();
+		$details['file'] = $e->getFile();
+		$details['trace'] = $e->getTrace();
+		return self::handleAny($details);
+	}
+    
 
-    /**
-     * Handle either Errors or Exceptions
-     *
-     * @param array details
-     */
-    private static function handleAny($details) {
-        $error_logfile = ERROR_HANDLER_LOGFILE;
-
-        if(!empty($error_logfile)) {
+	/**
+	 * Handle either Errors or Exceptions
+	 *
+	 * @param array details
+	 */
+	private static function handleAny($details) {
+		
+        $error_handler_logfile = ERROR_HANDLER_LOGFILE;
+		if(!empty($error_handler_logfile)) {
             self::log($details);
-        }
-        $error_email = ERROR_HANDLER_EMAIL_ADDRESS;
-        if(!empty($error_email)) {
-            self::email($details);
+		}
+		
+        $error_handler_email_address = ERROR_HANDLER_EMAIL_ADDRESS;
+		if(!empty($error_handler_email_address)) {
+			self::email($details);
+		}
+        
+        if(ERROR_HANDLER_LEVEL_CONTINUE_SCRIPT & $details['errno']) {
+            return;
         }
 
-        if(ERROR_HANDLER_DISPLAY) {
-                self::bluescreen($details);
-        }
-        elseif(ERROR_HANDLER_DISPLAY_USER && $details) {
-            if(ERROR_HANDLER_LEVEL_CONTINUE_SCRIPT & $details['errno']) {
-                return;
-            }
-            self::user($details);
-        }
-    }
+		if(ERROR_HANDLER_USE_BLUESCREEN) {
+		    self::bluescreen($details);  
+		}
+		else {
+            self::user($details);  
+		}
+	}
 
     /**
      * Send an e-mail with the error to the support/administrator
@@ -188,34 +188,40 @@ if (!defined('ERROR_HANDLER_LEVEL_CONTINUE_SCRIPT')) {
         }
     }
 
-    /**
-     * Write error to log file
-     *
-     * @param array error details
-     */
-    private static function log($input) {
+	/**
+	 * Write error to log file
+	 *
+	 * @param array error details
+	 */
+	public static function log($input) {
+		
+        
         if(self::isUnique($input)) {
-            /*
-            $out = str_repeat('-', 60)."\n";
-            $out .= date('r')." - ".$input['type'].": ".$input['message']."\n";
-            $out .= "in ".$input['file']." line ".$input['line']."\n";
-            $out .= "Request: ".$_SERVER['REQUEST_URI']."\n";
-            */
+			/*
+			$out = str_repeat('-', 60)."\n";
+			$out .= date('r')." - ".$input['type'].": ".$input['message']."\n";
+			$out .= "in ".$input['file']." line ".$input['line']."\n";
+			$out .= "Request: ".$_SERVER['REQUEST_URI']."\n";
+			*/
+            
+			$error = array(
+				'date' => date('r'),
+				'type' => $input['type'].' ('.$input['code'].')',
+				'message' => $input['message'],
+				'file' => $input['file'],
+				'line' => $input['line'],
+				'request' => $_SERVER['REQUEST_URI']
+			);
 
-            $error = array(
-                'date' => date('r'),
-                'type' => $input['type'],
-                'message' => $input['message'],
-                'file' => $input['file'],
-                'line' => $input['line'],
-                'request' => $_SERVER['REQUEST_URI']
-            );
-
-            if(touch(ERROR_HANDLER_LOGFILE)) {
+			
+            if(touch(ERROR_HANDLER_LOGFILE)) {				
                 file_put_contents(ERROR_HANDLER_LOGFILE, serialize($error) . "\n", FILE_APPEND);
+			}
+            else {
+                die('Unable to write to log file. Please contact the administrator.');
             }
-        }
-    }
+		}
+	}
 
     /**
      * A static function to nicely output exceptions
@@ -583,53 +589,53 @@ if (!defined('ERROR_HANDLER_LEVEL_CONTINUE_SCRIPT')) {
         exit(0);
     }
 
-    /**
-     * A static function display errors for users
-     *
-     * @param array details, see self::displayException()
-     */
-    public static function user($input) {
-            // saving previously buffered output for later
-            // egentlig b�r denne jo bare sende videre til en anden side?
+	/**
+	 * A static function display errors for users
+	 *
+	 * @param array details, see self::displayException()
+	 */
+	public static function user($input) {
+			// saving previously buffered output for later
+			// egentlig bør denne jo bare sende videre til en anden side?
 
             $previous_output = ob_get_contents();
             ob_end_clean();
 
-            ?>
-            <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-            <html xml:lang="da" xmlns="http://www.w3.org/1999/xhtml">
-                <head>
-                    <title>Der er opst�et en fejl</title>
-                    <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
-                    <style type="text/css">
-                    html {
-                        font-size: 85%;
-                    }
-                    body {
-                        font-family: verdana, sans-serif;
-                        font-size: 1em;
-                        text-align: center;
-                    }
-                    #container {
-                        border: 5px solid #ccc;
-                        width: 30em;
-                        margin: 3em auto;
-                        text-align: left;
-                        padding: 2em;
-                    }
-                    </style>
-                </head>
-                <body>
-                <div id="container">
-                <h1>Der er opst�et en fejl</h1>
-                <p>De ansvarlige er underrettet, og de kigger p� fejlen s� hurtigt som muligt.</p>
-                <p>Vi beklager ulejligheden.</p>
-                </div>
-                </body>
-            </html>
-            <?php
-            exit;
-        }
+			?>
+			<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+			<html xml:lang="da" xmlns="http://www.w3.org/1999/xhtml">
+				<head>
+					<title>Der er opstået en fejl</title>
+					<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+					<style type="text/css">
+					html {
+						font-size: 85%;
+					}
+					body {
+						font-family: verdana, sans-serif;
+						font-size: 1em;
+						text-align: center;
+					}
+					#container {
+						border: 5px solid #ccc;
+						width: 30em;
+						margin: 3em auto;
+						text-align: left;
+						padding: 2em;
+					}
+					</style>
+				</head>
+				<body>
+				<div id="container">
+				<h1>Der er opstået en fejl</h1>
+				<p>De ansvarlige er underrettet, og de kigger på fejlen så hurtigt som muligt.</p>
+				<p>Vi beklager ulejligheden.</p>
+				</div>
+				</body>
+			</html>
+			<?php
+			exit;
+		}
 
     /**
      * Check whether an error already occured before
