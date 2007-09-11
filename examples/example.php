@@ -27,6 +27,6 @@ function exceptionhandler($e)
 set_error_handler('errorhandler');
 set_exception_handler('exceptionhandler');
 
-throw new Exception('Exception');
+//throw new Exception('Exception');
 
 trigger_error('usererror', E_USER_ERROR);
