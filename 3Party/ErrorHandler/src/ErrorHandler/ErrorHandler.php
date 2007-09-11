@@ -70,21 +70,45 @@ class ErrorHandler
 {
     private $loggers = array();
 
-    function addLogger($logger)
+    /**
+     * Adds loggers and sets when the logger should handle an error.
+     *
+     * @param object  $logger     A logger implementing the update method
+     * @param integer $errorlevel When should the logger be notified
+     *
+     * @return void
+     */
+    function addLogger($logger, $errorlevel = E_USER_NOTICE)
     {
-        // should we make some kind of test on the interface for the added observers
-        $this->loggers[] = $logger;
+        if (!method_exists($logger, 'log')) {
+            throw new Exception('The logger ' . get_class($logger) . ' does not implement an updated method.');
+        }
+        $this->loggers[] = array('logger' => $logger, 'errorlevel' => $errorlevel);
     }
 
+    /**
+     * Gets all loggers
+     *
+     * @return array
+     */
     function getLoggers()
     {
         return $this->loggers;
     }
 
+    /**
+     * Notifies all loggers. This handles when a logger is adviced.
+     *
+     * @param array $error The error array
+     *
+     * @return void
+     */
     function notifyLoggers($error)
     {
         foreach ($this->getLoggers() as $logger) {
-            $logger->log($error);
+            if ($error['errno'] <= $logger['errorlevel']) {
+                $logger['logger']->log($error);
+            }
         }
     }
 

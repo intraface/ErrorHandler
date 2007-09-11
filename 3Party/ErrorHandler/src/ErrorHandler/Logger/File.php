@@ -16,7 +16,7 @@ class ErrorHandler_Logger_File
      *
      * @return void
      */
-    public function write($input) {
+    public function log($input) {
         //if(self::isUnique($input)) {
             /*
             $out = str_repeat('-', 60)."\n";
@@ -42,6 +42,6 @@ class ErrorHandler_Logger_File
 
     public function update($input)
     {
-        $this->write($input);
+        $this->log($input);
     }
 }

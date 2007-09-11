@@ -1,6 +1,11 @@
 <?php
 class ErrorHandler_Logger_BlueScreen
 {
+    public function update($input)
+    {
+        $this->write($input);
+    }
+
     /**
      * TODO hvad goer vi med det level hvor vi skal haandtere fejlene fra.
      * TODO hvad goer vi med unique?
