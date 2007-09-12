@@ -36,46 +36,46 @@ class ErrorHandler
     /**
      * @var array
      */
-    private $loggers = array();
+    private $observers = array();
 
     /**
-     * Adds loggers and sets when the logger should handle an error.
+     * Adds observers and sets when the logger should handle an error.
      *
      * @param object  $logger     A logger implementing the update method
      * @param integer $errorlevel When should the logger be notified
      *
      * @return void
      */
-    public function addLogger($logger, $errorlevel = E_USER_NOTICE)
+    public function addObserver($observer, $errorlevel = E_USER_NOTICE)
     {
-        if (!method_exists($logger, 'log')) {
-            throw new Exception('The logger ' . get_class($logger) . ' does not implement an updated method.');
+        if (!method_exists($observer, 'update')) {
+            throw new Exception('The observer ' . get_class($logger) . ' does not implement an updated method.');
         }
-        $this->loggers[] = array('logger' => $logger, 'errorlevel' => $errorlevel);
+        $this->observers[] = array('observer' => $observer, 'errorlevel' => $errorlevel);
     }
 
     /**
-     * Gets all loggers
+     * Gets all observers
      *
      * @return array
      */
-    protected function getLoggers()
+    protected function getObservers()
     {
-        return $this->loggers;
+        return $this->observers;
     }
 
     /**
-     * Notifies all loggers. This handles when a logger is adviced.
+     * Notifies all observers. This handles when an observer is adviced.
      *
      * @param array $error The error array
      *
      * @return void
      */
-    protected function notifyLoggers($error)
+    protected function notifyObservers($error)
     {
-        foreach ($this->getLoggers() as $logger) {
+        foreach ($this->getObservers() as $logger) {
             if ($error['errno'] <= $logger['errorlevel']) {
-                $logger['logger']->log($error);
+                $logger['observer']->update($error);
             }
         }
     }
@@ -162,7 +162,7 @@ class ErrorHandler
      * @return void
      */
     private function handleAny($details) {
-        $this->notifyLoggers($details);
+        $this->notifyObservers($details);
     }
 }
 ?>

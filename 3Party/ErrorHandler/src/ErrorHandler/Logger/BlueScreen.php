@@ -31,7 +31,7 @@
  * @example   examples/exceptions.php
  * @link      http://www.sitepoint.com/blogs/2006/08/12/pimpin-harrys-pretty-bluescreen/
  */
-class ErrorHandler_Logger_BlueScreen
+class ErrorHandler_Observer_BlueScreen
 {
     /**
      * Writes out the screen.
@@ -40,7 +40,7 @@ class ErrorHandler_Logger_BlueScreen
      *
      * @return void
      */
-    public function log($input)
+    public function update($input)
     {
         $o = create_function('$in','echo htmlspecialchars($in);');
         $sub = create_function('$f','$loc="";if(isset($f["class"])){
