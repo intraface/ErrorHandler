@@ -26,7 +26,7 @@
  * @example   examples/exceptions.php
  * @link      http://www.sitepoint.com/blogs/2006/08/12/pimpin-harrys-pretty-bluescreen/
  */
-class ErrorHandler_Logger_Email
+class ErrorHandler_Observer_Email
 {
 
     /**
@@ -54,7 +54,7 @@ class ErrorHandler_Logger_Email
      *
      * @return void
      */
-    public static function log($input) {
+    public static function update($input) {
         // building mail text
         $out  = $input['type']." making ".$_SERVER['REQUEST_METHOD']." request to ".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."\n";
         $out .= "Message: ".$input['message']."\n";

@@ -26,10 +26,20 @@
  * @example   examples/exceptions.php
  * @link      http://www.sitepoint.com/blogs/2006/08/12/pimpin-harrys-pretty-bluescreen/
  */
-class ErrorHandler_Logger_User
+class ErrorHandler_Observer_User
 {
+    /**
+     * @var string callback
+     */
     private $translator;
 
+    /**
+     * Constructor
+     *
+     * @param mixed $translator Either an object or a callback
+     *
+     * @return void
+     */
     function __construct($translator = null)
     {
         if (is_object($translator)) {
@@ -41,11 +51,25 @@ class ErrorHandler_Logger_User
         }
     }
 
+    /**
+     * Hook for translation
+     *
+     * @param string $phrase Translates the phrase
+     *
+     * @return void
+     */
     function translate($phrase)
     {
         return $phrase;
     }
 
+    /**
+     * Hook for translation
+     *
+     * @param string $phrase Translates the phrase
+     *
+     * @return void
+     */
     function __($phrase)
     {
         return call_user_func($this->translator, $phrase);
@@ -58,7 +82,7 @@ class ErrorHandler_Logger_User
      *
      * @return void
      */
-    public function log($input)
+    public function update($input)
     {
             ?>
             <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">

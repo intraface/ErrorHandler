@@ -26,12 +26,14 @@
  * @example   examples/exceptions.php
  * @link      http://www.sitepoint.com/blogs/2006/08/12/pimpin-harrys-pretty-bluescreen/
  */
-class ErrorHandler_Logger_File
+require_once 'Log.php';
+
+class ErrorHandler_Observer_File
 {
     /**
-     * @var string
+     * @var object
      */
-    private $logfile;
+    private $logger;
 
     /**
      * Constructor
@@ -40,10 +42,16 @@ class ErrorHandler_Logger_File
      *
      * @return void
      */
-    function __construct($logfile = './error.log')
+    function __construct($logger = null)
     {
         // todo maybe a test for read and write access
-        $this->logfile = $logfile;
+        if (null === $logger) {
+            $this->logger = &Log::factory('file', './error.log', 'INTRAFACE');
+        } elseif (is_object($logger)) {
+            $this->logger = $logger;
+        } elseif (is_string($logger)) {
+            $this->logger = &Log::factory('file', $logger, 'INTRAFACE');
+        }
     }
 
     /**
@@ -53,25 +61,12 @@ class ErrorHandler_Logger_File
      *
      * @return void
      */
-    public function log($input) {
-        /*
-        $out = str_repeat('-', 60)."\n";
+    public function update($input) {
+        $out  = str_repeat('-', 60)."\n";
         $out .= date('r')." - ".$input['type'].": ".$input['message']."\n";
         $out .= "in ".$input['file']." line ".$input['line']."\n";
         $out .= "Request: ".$_SERVER['REQUEST_URI']."\n";
-        */
 
-        $error = array(
-            'date' => date('r'),
-            'type' => $input['type'],
-            'message' => $input['message'],
-            'file' => $input['file'],
-            'line' => $input['line'],
-            'request' => $_SERVER['REQUEST_URI']
-        );
-
-        if(touch($this->logfile)) {
-            file_put_contents($this->logfile, serialize($error) . "\n", FILE_APPEND);
-        }
+        $this->logger->log($out);
     }
 }
