@@ -1,37 +1,47 @@
 <?php
+/**
+ * Pimpin Harry's pretty blue screen
+ *
+ * Generates a BlueScreen with a lot of information.
+ *
+ * This should never be used in production, as it will give a potential hacker every chance
+ * to hack your site.
+ *
+ * PHP Version 5
+ *
+ * @package   ErrorHandler
+ * @author    Lars Olesen <lars@legestue.net>
+ * @author    Sune Jensen <sj@sunet.dk>
+ * @copyright 2007 Authors
+ * @license   GPL http://www.opensource.org/licenses/gpl-license.php
+ * @version   @package-version@
+ * @link      http://www.sitepoint.com/blogs/2006/08/12/pimpin-harrys-pretty-bluescreen/
+ */
+
+/**
+ * Pimpin Harry's pretty blue screen
+ *
+ * @package   ErrorHandler
+ * @author    Lars Olesen <lars@legestue.net>
+ * @author    Sune Jensen <sj@sunet.dk>
+ * @copyright 2007 Authors
+ * @license   GPL http://www.opensource.org/licenses/gpl-license.php
+ * @version   @package-version@
+ * @example   examples/trigger_error.php
+ * @example   examples/exceptions.php
+ * @link      http://www.sitepoint.com/blogs/2006/08/12/pimpin-harrys-pretty-bluescreen/
+ */
 class ErrorHandler_Logger_BlueScreen
 {
-    public function update($input)
-    {
-        $this->write($input);
-    }
-
     /**
-     * TODO hvad goer vi med det level hvor vi skal haandtere fejlene fra.
-     * TODO hvad goer vi med unique?
+     * Writes out the screen.
      *
-     * __construct($errorlevel, $params) {}
-     *
-     * A static function to nicely output exceptions
-     * Named after Harry's bluescreen method ;)
-     *
-     * This should never be used in production. Is it possible to add a different observer
-     * depending on the context (production / development)
-     *
-     * @param array details, see self::displayException()
+     * @param array $input See which ones in the ErroHandler
      *
      * @return void
      */
-    public function log($input) {
-        // saving previously buffered output for later
-        //ob_start();
-        //$previous_output = ob_get_contents();
-
-        // TODO vi kan ikke bare end_clean hvis ob ikke er startet! Derfor er den udkommenteret,
-        // indtil vi finder ud af hvordan vi loeser det.
-        // ob_end_clean();
-        //ob_start();
-
+    public function log($input)
+    {
         $o = create_function('$in','echo htmlspecialchars($in);');
         $sub = create_function('$f','$loc="";if(isset($f["class"])){
             $loc.=$f["class"].$f["type"];}
@@ -380,8 +390,6 @@ class ErrorHandler_Logger_BlueScreen
         </body>
         </html>
         <?php
-        // ob_end_flush();
         exit(0);
     }
-
 }

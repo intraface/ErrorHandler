@@ -1,4 +1,31 @@
 <?php
+/**
+ * Gives a generic error message to the user, if something happens in the program.
+ *
+ * PHP Version 5
+ *
+ * @package   ErrorHandler
+ * @author    Lars Olesen <lars@legestue.net>
+ * @author    Sune Jensen <sj@sunet.dk>
+ * @copyright 2007 Authors
+ * @license   GPL http://www.opensource.org/licenses/gpl-license.php
+ * @version   @package-version@
+ * @link      http://www.sitepoint.com/blogs/2006/08/12/pimpin-harrys-pretty-bluescreen/
+ */
+
+/**
+ * Gives a generic error message to the user, if something happens in the program.
+ *
+ * @package   ErrorHandler
+ * @author    Lars Olesen <lars@legestue.net>
+ * @author    Sune Jensen <sj@sunet.dk>
+ * @copyright 2007 Authors
+ * @license   GPL http://www.opensource.org/licenses/gpl-license.php
+ * @version   @package-version@
+ * @example   examples/trigger_error.php
+ * @example   examples/exceptions.php
+ * @link      http://www.sitepoint.com/blogs/2006/08/12/pimpin-harrys-pretty-bluescreen/
+ */
 class ErrorHandler_Logger_User
 {
     private $translator;
@@ -25,17 +52,14 @@ class ErrorHandler_Logger_User
     }
 
     /**
-     * A static function display errors for users
+     * Display errors for users
      *
-     * @param array details, see self::displayException()
+     * @param array $input Array with the error input
+     *
+     * @return void
      */
-    public function log($input) {
-            // saving previously buffered output for later
-            // egentlig b�r denne jo bare sende videre til en anden side?
-
-            $previous_output = ob_get_contents();
-            //ob_end_clean();
-
+    public function log($input)
+    {
             ?>
             <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
             <html xml:lang="da" xmlns="http://www.w3.org/1999/xhtml">
