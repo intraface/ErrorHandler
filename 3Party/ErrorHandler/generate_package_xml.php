@@ -9,12 +9,13 @@
  * @version  @package-version@
  */
 
+require_once 'PEAR/PackageFileManager2.php';
+PEAR::setErrorHandling(PEAR_ERROR_DIE);
+
 $version = '0.2.1';
 $notes = '* initial release as a PEAR package';
 $stability = 'alpha';
 
-require_once 'PEAR/PackageFileManager2.php';
-PEAR::setErrorHandling(PEAR_ERROR_DIE);
 $pfm = new PEAR_PackageFileManager2();
 $pfm->setOptions(
     array(
@@ -24,7 +25,6 @@ $pfm->setOptions(
         'packagefile'       => 'package.xml',
         'ignore'            => array(
             'generate_package_xml.php',
-            'package.xml',
             '*.tgz'
             ),
         'exceptions'        => array(),
@@ -35,11 +35,11 @@ $pfm->setOptions(
 $pfm->setPackage('ErrorHandler');
 $pfm->setSummary('Custom error handler to use with php5');
 $pfm->setDescription('A custom error handler which improves on PHPs own error handler.');
-$pfm->setUri('http://localhost/');
+$pfm->setChannel('public.intraface.dk');
 $pfm->setLicense('BSD license', 'http://www.opensource.org/licenses/bsd-license.php');
 
 $pfm->addMaintainer('lead', 'lsolesen', 'Lars Olesen', 'lars@legestue.net');
-$pfm->addMaintainer('lead', 'sune', 'Sune Jensen', 'sj@sunet.dk');
+$pfm->addMaintainer('lead', 'sune.t.jensen', 'Sune Jensen', 'sj@sunet.dk');
 
 $pfm->setPackageType('php');
 

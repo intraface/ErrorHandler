@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class ErrorHandler</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class ErrorHandler</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Pimpin Harry's pretty blue screen</p>
+<p class="description"><p>Handles errors and exceptions.</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Sune Jensen &lt;<a href="mailto:sj@sunet.dk">sj@sunet.dk</a>&gt;</li>
+				<li><span class="field">author:</span> Lars Olesen &lt;<a href="mailto:lars@legestue.net">lars@legestue.net</a>&gt;</li>
+				<li><span class="field">version:</span> @package-version@</li>
+				<li><span class="field">copyright:</span> 2007 Authors</li>
+				<li><span class="field">link:</span> <a href="http://www.sitepoint.com/blogs/2006/08/12/pimpin-harrys-pretty-bluescreen/">http://www.sitepoint.com/blogs/2006/08/12/pimpin-harrys-pretty-bluescreen/</a></li>
+				<li><span class="field">example:</span> example not found</li>
+				<li><span class="field">license:</span> GPL</li>
+				<li><span class="field">example:</span> example not found</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_ErrorHandler.php.html">/ErrorHandler.php</a> (line <span class="field"><a href="../__filesource/fsource_ErrorHandler__ErrorHandler.php.html#a34">34</a></span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																												
+												<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#addObserver" title="details" class="method-name">addObserver</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$observer</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$errorlevel</span> = <span class="var-default">E_USER_NOTICE</span>], <span class="var-type">object</span>&nbsp;<span class="var-name">$logger</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#getObservers" title="details" class="method-name">getObservers</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#handleError" title="details" class="method-name">handleError</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$errno</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$errstr</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$errfile</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$errline</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$errcontext</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#handleException" title="details" class="method-name">handleException</a>
+											(<span class="var-type">Exception</span>&nbsp;<span class="var-name">$e</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#notifyObservers" title="details" class="method-name">notifyObservers</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$error</span>)
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="methodaddObserver" id="addObserver"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">addObserver</span> (line <span class="line-number"><a href="../__filesource/fsource_ErrorHandler__ErrorHandler.php.html#a49">49</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Adds observers and sets when the logger should handle an error.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			addObserver
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$observer</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$errorlevel</span> = <span class="var-default">E_USER_NOTICE</span>], <span class="var-type">object</span>&nbsp;<span class="var-name">$logger</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">$logger</span><span class="var-description">: A logger implementing the update method</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$errorlevel</span><span class="var-description">: When should the logger be notified</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$observer</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetObservers" id="getObservers"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getObservers</span> (line <span class="line-number"><a href="../__filesource/fsource_ErrorHandler__ErrorHandler.php.html#a62">62</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Gets all observers</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			getObservers
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodhandleError" id="handleError"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">handleError</span> (line <span class="line-number"><a href="../__filesource/fsource_ErrorHandler__ErrorHandler.php.html#a94">94</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Hook for error handling</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> nothing</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			handleError
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$errno</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$errstr</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$errfile</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$errline</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$errcontext</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$errno</span><span class="var-description">: Error level</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$errstr</span><span class="var-description">: Error message</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$errfile</span><span class="var-description">: Error file</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$errline</span><span class="var-description">: Line</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$errcontext</span><span class="var-description">: Context (all defined vars)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodhandleException" id="handleException"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">handleException</span> (line <span class="line-number"><a href="../__filesource/fsource_ErrorHandler__ErrorHandler.php.html#a144">144</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Hook for exception handling</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			handleException
+		</span>
+					(<span class="var-type">Exception</span>&nbsp;<span class="var-name">$e</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Exception</span>
+				<span class="var-name">$e</span><span class="var-description">: exception to handle</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodnotifyObservers" id="notifyObservers"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">notifyObservers</span> (line <span class="line-number"><a href="../__filesource/fsource_ErrorHandler__ErrorHandler.php.html#a74">74</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Notifies all observers. This handles when an observer is adviced.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			notifyObservers
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$error</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$error</span><span class="var-description">: The error array</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Wed, 12 Sep 2007 11:04:08 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.0a1</a>
+	</p>
+	</div></body>
+</html>
