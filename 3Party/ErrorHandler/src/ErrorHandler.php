@@ -46,7 +46,7 @@ class ErrorHandler
      *
      * @return void
      */
-    public function addObserver($observer, $errorlevel = E_USER_NOTICE)
+    public function addObserver($observer, $errorlevel = E_ALL)
     {
         if (!method_exists($observer, 'update')) {
             // Are we able to throw an exception as the errorhandler is also able to handle exceptions!
@@ -75,7 +75,7 @@ class ErrorHandler
     protected function notifyObservers($error)
     {
         foreach ($this->getObservers() as $logger) {
-            if ($error['errno'] <= $logger['errorlevel']) {
+            if ($error['errno'] & $logger['errorlevel']) {
                 $logger['observer']->update($error);
             }
         }
