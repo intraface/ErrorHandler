@@ -230,7 +230,7 @@ class ErrorHandler_Observer_BlueScreen
                           <td><?php $o($k); ?></td>
                           <td><?php $o($name);?></td>
                           <td class="code">
-                            <div><?php highlight_string(var_export($v,TRUE));?></div>
+                            <div><?php highlight_string(var_dump($v,TRUE));?></div>
                           </td>
                         </tr>
                         <?php
