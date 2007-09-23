@@ -49,7 +49,8 @@ class ErrorHandler
     public function addObserver($observer, $errorlevel = E_USER_NOTICE)
     {
         if (!method_exists($observer, 'update')) {
-            throw new Exception('The observer ' . get_class($logger) . ' does not implement an updated method.');
+            // Are we able to throw an exception as the errorhandler is also able to handle exceptions!
+            throw new Exception('The observer ' . get_class($observer) . ' does not implement an updated method.');
         }
         $this->observers[] = array('observer' => $observer, 'errorlevel' => $errorlevel);
     }
