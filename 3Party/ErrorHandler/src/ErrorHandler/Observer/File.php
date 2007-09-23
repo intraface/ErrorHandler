@@ -62,11 +62,15 @@ class ErrorHandler_Observer_File
      * @return void
      */
     public function update($input) {
+        
         $out  = str_repeat('-', 60)."\n";
         $out .= date('r')." - ".$input['type'].": ".$input['message']."\n";
         $out .= "in ".$input['file']." line ".$input['line']."\n";
         $out .= "Request: ".$_SERVER['REQUEST_URI']."\n";
-
+        
+        // Possible other pattern for logging filling less lines, probably making it easier to parse.
+        // $out = $input['type'].": ".$input['message']." in ".$input['file']." line ".$input['line']. " (Request: ".$_SERVER['REQUEST_URI'].")";
+        
         $this->logger->log($out);
     }
 }
