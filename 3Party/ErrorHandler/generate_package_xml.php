@@ -12,16 +12,16 @@
 require_once 'PEAR/PackageFileManager2.php';
 PEAR::setErrorHandling(PEAR_ERROR_DIE);
 
-$version = '0.2.1';
-$notes = '* initial release as a PEAR package';
+$version = '0.2.2';
+$notes = '* changed format for the error log';
 $stability = 'alpha';
 
 $pfm = new PEAR_PackageFileManager2();
 $pfm->setOptions(
     array(
-        'baseinstalldir'    => 'ErrorHandler',
+        'baseinstalldir'    => '/',
         'filelistgenerator' => 'file',
-        'packagedirectory'  => dirname(__FILE__),
+        'packagedirectory'  => dirname(__FILE__) . '/src/',
         'packagefile'       => 'package.xml',
         'ignore'            => array(
             'generate_package_xml.php',
