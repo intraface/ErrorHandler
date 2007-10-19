@@ -42,6 +42,7 @@ class ErrorHandler_Observer_BlueScreen
      */
     public function update($input)
     {
+        ob_end_clean();
         $o = create_function('$in','echo htmlspecialchars($in);');
         $sub = create_function('$f','$loc="";if(isset($f["class"])){
             $loc.=$f["class"].$f["type"];}
