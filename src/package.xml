@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.6.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+    http://pear.php.net/dtd/tasks-1.0.xsd
+    http://pear.php.net/dtd/package-2.0
+    http://pear.php.net/dtd/package-2.0.xsd">
+ <name>ErrorHandler</name>
+ <channel>public.intraface.dk</channel>
+ <summary>Custom error handler to use with php5</summary>
+ <description>A custom error handler which improves on PHPs own error handler.</description>
+ <lead>
+  <name>Lars Olesen</name>
+  <user>lsolesen</user>
+  <email>lars@legestue.net</email>
+  <active>yes</active>
+ </lead>
+ <lead>
+  <name>Sune Jensen</name>
+  <user>sune.t.jensen</user>
+  <email>sj@sunet.dk</email>
+  <active>yes</active>
+ </lead>
+ <date>2007-11-03</date>
+ <time>19:56:35</time>
+ <version>
+  <release>0.2.2</release>
+  <api>0.2.2</api>
+ </version>
+ <stability>
+  <release>alpha</release>
+  <api>alpha</api>
+ </stability>
+ <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD license</license>
+ <notes>* changed format for the error log</notes>
+ <contents>
+  <dir baseinstalldir="/" name="/">
+   <dir name="ErrorHandler">
+    <dir name="Observer">
+     <file name="BlueScreen.php" role="php">
+      <tasks:replace from="@package-version@" to="version" type="package-info" />
+     </file>
+     <file name="Echo.php" role="php">
+      <tasks:replace from="@package-version@" to="version" type="package-info" />
+     </file>
+     <file name="Email.php" role="php">
+      <tasks:replace from="@package-version@" to="version" type="package-info" />
+     </file>
+     <file name="File.php" role="php">
+      <tasks:replace from="@package-version@" to="version" type="package-info" />
+     </file>
+     <file name="User.php" role="php">
+      <tasks:replace from="@package-version@" to="version" type="package-info" />
+     </file>
+    </dir> <!-- //ErrorHandler/Observer -->
+   </dir> <!-- //ErrorHandler -->
+   <file name="ErrorHandler.php" role="php">
+    <tasks:replace from="@package-version@" to="version" type="package-info" />
+   </file>
+  </dir> <!-- / -->
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.1.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.5.0</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease />
+ <changelog>
+  <release>
+   <version>
+    <release>0.2.2</release>
+    <api>0.2.2</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2007-11-03</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD license</license>
+   <notes>* changed format for the error log</notes>
+  </release>
+ </changelog>
+</package>
