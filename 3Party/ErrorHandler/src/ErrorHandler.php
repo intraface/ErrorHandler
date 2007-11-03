@@ -146,7 +146,7 @@ class ErrorHandler
         $details['date'] = date('Y-m-d H:i:s');
         $details['type'] = get_class($e);
         $details['code'] = $e->getCode();
-        $details['errno'] = '';
+        $details['errno'] = 256; // E_USER_ERROR, but is this correct? 
         $details['message']= $e->getMessage();
         $details['line'] = $e->getLine();
         $details['file'] = $e->getFile();
