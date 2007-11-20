@@ -12,8 +12,8 @@
 require_once 'PEAR/PackageFileManager2.php';
 PEAR::setErrorHandling(PEAR_ERROR_DIE);
 
-$version = '0.2.2';
-$notes = '* changed format for the error log';
+$version = '0.2.3';
+$notes = '* Added simple observer Echo';
 $stability = 'alpha';
 
 $pfm = new PEAR_PackageFileManager2();

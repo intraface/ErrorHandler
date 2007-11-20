@@ -19,18 +19,18 @@
   <email>sj@sunet.dk</email>
   <active>yes</active>
  </lead>
- <date>2007-11-03</date>
- <time>19:56:35</time>
+ <date>2007-11-20</date>
+ <time>18:37:25</time>
  <version>
-  <release>0.2.2</release>
-  <api>0.2.2</api>
+  <release>0.2.3</release>
+  <api>0.2.3</api>
  </version>
  <stability>
   <release>alpha</release>
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD license</license>
- <notes>* changed format for the error log</notes>
+ <notes>* Added simple observer Echo</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="ErrorHandler">
@@ -81,6 +81,19 @@
    <date>2007-11-03</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD license</license>
    <notes>* changed format for the error log</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.2.3</release>
+    <api>0.2.3</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2007-11-20</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD license</license>
+   <notes>* Added simple observer Echo</notes>
   </release>
  </changelog>
 </package>
