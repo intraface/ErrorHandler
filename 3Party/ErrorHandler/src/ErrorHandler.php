@@ -120,7 +120,11 @@ class ErrorHandler
         $details['line']    = $errline;
         $details['file']    = $errfile;
         $details['trace']   = array();
-        $details['request'] = $_SERVER['REQUEST_URI'];
+        if (!empty($_SERVER['REQUEST_URI'])) {
+            $details['request'] = $_SERVER['REQUEST_URI'];
+        } else {
+            $details['request'] = 'unknown';
+        }
 
         // Building exception-like backtrace
         $backtrace = debug_backtrace();
@@ -146,7 +150,7 @@ class ErrorHandler
         $details['date'] = date('Y-m-d H:i:s');
         $details['type'] = get_class($e);
         $details['code'] = $e->getCode();
-        $details['errno'] = 256; // E_USER_ERROR, but is this correct? 
+        $details['errno'] = 256; // E_USER_ERROR, but is this correct?
         $details['message']= $e->getMessage();
         $details['line'] = $e->getLine();
         $details['file'] = $e->getFile();

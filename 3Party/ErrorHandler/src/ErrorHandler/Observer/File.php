@@ -52,7 +52,7 @@ class ErrorHandler_Observer_File
         } elseif (is_string($logger)) {
             $this->logger = &Log::factory('file', $logger, 'INTRAFACE');
         }
-        
+
         // Her we can set the date time format of the error. It seems to be strange in the PEAR Log.
         // $this->logger->_timeFormat = '';
     }
@@ -65,7 +65,7 @@ class ErrorHandler_Observer_File
      * @return void
      */
     public function update($input) {
-        
+
         /*
         $out  = str_repeat('-', 60)."\n";
         $out .= date('r')." - ".$input['type'].": ".$input['message']."\n";
@@ -73,8 +73,13 @@ class ErrorHandler_Observer_File
         $out .= "Request: ".$_SERVER['REQUEST_URI']."\n";
         */
         // Possible other pattern for logging filling less lines, probably making it easier to parse.
-        $out = $input['type'].": ".$input['message']." in ".$input['file']." line ".$input['line']. " (Request: ".$_SERVER['REQUEST_URI'].")";
-        
+        if (!empty($_SERVER['REQUEST_URI'])) {
+            $input['request'] = $_SERVER['REQUEST_URI'];
+        } else {
+            $input['request'] = 'unknown';
+        }
+        $out = $input['type'].": ".$input['message']." in ".$input['file']." line ".$input['line']. " (Request: ".$input['request'].")";
+
         $this->logger->log($out);
     }
 }
