@@ -12,8 +12,8 @@
 require_once 'PEAR/PackageFileManager2.php';
 PEAR::setErrorHandling(PEAR_ERROR_DIE);
 
-$version = '0.2.3';
-$notes = '* Added simple observer Echo';
+$version = '0.2.4';
+$notes = '* Now removes newlines in message for the File observer';
 $stability = 'alpha';
 
 $pfm = new PEAR_PackageFileManager2();

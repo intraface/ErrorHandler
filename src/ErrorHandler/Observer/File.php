@@ -78,6 +78,7 @@ class ErrorHandler_Observer_File
         } else {
             $input['request'] = 'unknown';
         }
+        $input['message'] = str_replace(PHP_EOL, ' ', $input['message']);
         $out = $input['type'].": ".$input['message']." in ".$input['file']." line ".$input['line']. " (Request: ".$input['request'].")";
 
         $this->logger->log($out);
