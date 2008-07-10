@@ -205,7 +205,7 @@ class ErrorHandler_Observer_BlueScreen
             <?php $frames = $input['trace']; foreach ( $frames as $frame_id => $frame ) { ?>
               <li class="frame">
                 <?php echo $sub($frame); ?>
-                [<?php $o($frame['file']); ?>, line <?php $o($frame['line']);?>]
+                [<?php if(isset($frame['file'])) $o($frame['file']); ?>, line <?php if(isset($frame['line'])) $o($frame['line']);?>]
                 <?php
                 if ( count($frame['args']) > 0 ) {
                   $params = $parms($frame);
@@ -239,7 +239,7 @@ class ErrorHandler_Observer_BlueScreen
                         ?>
                     </tbody>
                   </table>
-                <?php } if ( is_readable($frame['file']) ) { ?>
+                <?php } if (isset($frame['file']) &&  is_readable($frame['file']) ) { ?>
                 <div class="commands">
                     <a href='#' onclick="return varToggle(this, '<?php
                     $o($frame_id); ?>','c')"><span>&#x25b6;</span> Src</a>
