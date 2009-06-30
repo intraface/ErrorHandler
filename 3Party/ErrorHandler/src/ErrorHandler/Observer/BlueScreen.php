@@ -214,6 +214,7 @@ class ErrorHandler_Observer_BlueScreen
                       <a href='#' onclick="return varToggle(this, '<?php
                       $o($frame_id); ?>','v')"><span>&#x25b6;</span> Args</a>
                   </div>
+                  <?php /* 
                   <table class="vars" id="v<?php $o($frame_id); ?>">
                     <thead>
                       <tr>
@@ -239,6 +240,7 @@ class ErrorHandler_Observer_BlueScreen
                         ?>
                     </tbody>
                   </table>
+                  */ ?>
                 <?php } if (isset($frame['file']) &&  is_readable($frame['file']) ) { ?>
                 <div class="commands">
                     <a href='#' onclick="return varToggle(this, '<?php
