@@ -1,9 +1,7 @@
 <?php
-require_once 'config.test.php';
 
 require_once 'PHPUnit/Framework.php';
 
-require_once 'MDB2.php';
 require_once '../src/ErrorHandler.php';
 require_once '../src/ErrorHandler/Observer/File.php';
 
