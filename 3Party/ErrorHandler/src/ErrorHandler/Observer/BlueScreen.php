@@ -214,7 +214,7 @@ class ErrorHandler_Observer_BlueScreen
                       <a href='#' onclick="return varToggle(this, '<?php
                       $o($frame_id); ?>','v')"><span>&#x25b6;</span> Args</a>
                   </div>
-                  <?php /* 
+                  
                   <table class="vars" id="v<?php $o($frame_id); ?>">
                     <thead>
                       <tr>
@@ -232,7 +232,7 @@ class ErrorHandler_Observer_BlueScreen
                           <td><?php $o($k); ?></td>
                           <td><?php $o($name);?></td>
                           <td class="code">
-                            <div><?php highlight_string(var_dump($v,TRUE));?></div>
+                            <div><?php if(is_object($v)): highlight_string('Object: '.get_class($v)); elseif(is_array($v)): highlight_string('Array, with '.count($v).' keys');  else: highlight_string(var_dump($v,TRUE)); endif; ?></div>
                           </td>
                         </tr>
                         <?php
@@ -240,7 +240,7 @@ class ErrorHandler_Observer_BlueScreen
                         ?>
                     </tbody>
                   </table>
-                  */ ?>
+                   
                 <?php } if (isset($frame['file']) &&  is_readable($frame['file']) ) { ?>
                 <div class="commands">
                     <a href='#' onclick="return varToggle(this, '<?php
